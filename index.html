@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+
+    <style>
+        * ,*::after , *::before{
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* html{
+            background: #282828;
+        } */
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+          
+            font-family: sans-serif;
+        }
+        
+        .outercontainer{
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:linear-gradient(to right, rgb(255,215,0), rgb(172, 146, 3));
+
+            /* box-shadow: -4px -4px 10px rgba(67,67,67,0.5),
+                inset 4px 4px 10px rgba(0,0,0,0.5),
+                inset -4px -4px 10px rgba(67,67,67,0.5),
+                4px 4px 10px rgba(0,0,0,0.3); */
+        }
+        .container{
+            border-radius: 50%;
+            width: 270px;
+            height: 270px;
+            position: relative;
+            background: linear-gradient(to right , rgb(44, 44, 44),black);
+            color: white;
+            font-size: 1rem;
+        }
+        .container .number{
+            --rotate: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transform: rotate(var(--rotate));
+        }
+
+        .container .number p{
+            margin: 6px;
+        }
+
+        .container .one{ --rotate: 30deg;}
+        .container .one p{ transform: rotate( -30deg);}
+
+        .container .two{--rotate: 60deg;}
+        .container .two p{transform: rotate( -60deg);}
+
+        .container .three{--rotate: 90deg;}
+        .container .three p{transform: rotate( -90deg);}
+
+        .container .four{--rotate: 120deg;}
+        .container .four p{transform: rotate( -120deg);}
+
+        .container .five{--rotate: 150deg;}
+        .container .five p{transform: rotate( -150deg);}
+
+        .container .six{--rotate: 180deg;}
+        .container .six p{transform: rotate(-180deg);}
+
+        .container .seven{--rotate: 210deg;}
+        .container .seven p{transform: rotate(-210deg);}
+
+        .container .eight{--rotate: 240deg;}
+        .container .eight p{transform: rotate(-240deg);}
+
+        .container .nine{--rotate: 270deg;}
+        .container .nine p{transform: rotate( -270deg);}
+
+        .container .ten{--rotate: 300deg;}
+        .container .ten p{transform: rotate(-300deg);}
+
+        .container .eleven{--rotate: 330deg;}
+        .container .eleven p{transform: rotate( -330deg);}
+
+        .container .hand{
+            background:linear-gradient(to right, white, rgb(206, 205, 205));
+            height: 38%;
+            width: 2%;
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            transform-origin: bottom;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            opacity: 0.8;
+            transform: translateX(-50%);
+        }
+
+        .container .secondHand{
+            background: rgb(255, 0, 0);
+            width: 1%;
+            z-index: 2;
+            height: 43%;
+        }
+
+        .container .hourHand{
+            width: 1.8%;
+            height: 28%;
+            z-index: 1;
+            background:linear-gradient(to right, rgb(241, 241, 241), rgb(163, 162, 162));
+        }
+
+        .container::after{
+            content: "";
+            position: absolute;
+            z-index: 5;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background:linear-gradient(to right, white, rgb(206, 205, 205));
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+   
+    </style>
+</head>
+<body>
+    <div class="outercontainer">
+
+        <div class="container">
+
+            <div class="hand hourHand"></div>
+            <div class="hand minuteHand"></div>
+            <div class="hand secondHand"></div>
+
+            <div class="number one"><p>1</p></div>
+            <div class="number two"><p>2</p></div>
+            <div class="number three"><p>3</p></div>
+            <div class="number four"><p>4</p></div>
+            <div class="number five"><p>5</p></div>
+            <div class="number six"><p>6</p></div>
+            <div class="number seven"><p>7</p></div>
+            <div class="number eight"><p>8</p></div>
+            <div class="number nine"><p>9</p></div>
+            <div class="number ten"><p>10</p></div>
+            <div class="number eleven"><p>11</p></div>
+            <div class="number twelve"><p>12</p></div>
+
+        </div>
+    </div>
+       
+       <script>
+           let clockHour = document.querySelector('.hourHand');
+           let clockMinutes = document.querySelector('.minuteHand');
+           let clockSeconds = document.querySelector('.secondHand');
+        
+           setInterval(moveSecond, 1000);
+
+            function moveSecond() {
+                date = new Date()
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
+
+                let clock_hours = 30 * hours + minutes/2;
+                let clock_minutes = 6 * minutes;
+                let clock_seconds = 6 * seconds;
+                
+                clockHour.style.transform = `rotate(${clock_hours}deg)`
+                clockMinutes.style.transform = `rotate(${clock_minutes}deg)`
+                clockSeconds.style.transform = `rotate(${clock_seconds}deg)` 
+            }
+       </script>
+</body>
+</html>
